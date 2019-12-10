@@ -12,34 +12,59 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add directory="C:/opencv/build/include" />
+					<Add directory="C:/opencv/build/include/opencv2" />
 				</Compiler>
+				<Linker>
+					<Add library="C:/opencv/build/x86/mingw/lib/libade.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_calib3d412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_core412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_dnn412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_features2d412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_flann412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_gapi412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_highgui412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_imgcodecs412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_imgproc412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_ml412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_objdetect412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_photo412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_stitching412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_ts412.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_video412.dll.a" />
+					<Add library="C:/opencv/build/x86/mingw/lib/libopencv_videoio412.dll.a" />
+					<Add directory="C:/opencv/build/x86/mingw/lib" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Load-and-Display-and-Image" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-				</Compiler>
-				<Linker>
 					<Add option="-s" />
-				</Linker>
+				</Compiler>
 			</Target>
+			<Environment>
+				<Variable name="CV_VERSION" value="412" />
+			</Environment>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
+			<Add directory="$(#cv.include)" />
 		</Compiler>
+		<Linker>
+			<Add library="opencv_imgproc$(CV_VERSION).dll" />
+			<Add library="opencv_core$(CV_VERSION).dll" />
+			<Add library="opencv_highgui$(CV_VERSION).dll" />
+			<Add directory="$(#cv.lib)" />
+			<Add directory="$(#cv.bin)" />
+		</Linker>
+		<Unit filename="arnold_schwarzenegger.jpg" />
 		<Unit filename="main.cpp" />
-		<Unit filename="version.h" />
 		<Extensions>
-			<AutoVersioning>
-				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />
-				<Settings autoincrement="1" date_declarations="1" use_define="0" update_manifest="0" do_auto_increment="1" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
-				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
-				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
-			</AutoVersioning>
 			<code_completion />
 			<envvars />
 			<debugger />
