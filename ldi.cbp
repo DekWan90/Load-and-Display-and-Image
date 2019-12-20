@@ -6,39 +6,80 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
+			<Target title="DebugLinux">
+				<Option output="bin/Debug/Test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="`pkg-config opencv4 --cflags`" />
+					<Add option="`opencv-config --cxxflags`" />
+				</Compiler>
+				<Linker>
+					<Add option="`pkg-config opencv4 --libs`" />
+					<Add option="`opencv-config --ldstaticflags`" />
+				</Linker>
+			</Target>
+			<Target title="ReleaseLinux">
+				<Option output="bin/Release/Test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-std=c++11" />
+					<Add option="-s" />
+					<Add option="`pkg-config opencv --cflags`" />
+					<Add option="`opencv-config --cxxflags`" />
+				</Compiler>
+				<Linker>
+					<Add option="`pkg-config opencv --libs`" />
+					<Add option="`opencv-config --ldstaticflags`" />
+				</Linker>
+			</Target>
+			<Target title="DebugWindows">
 				<Option output="bin/Debug/ldi" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add directory="$(#cv.include)" />
 				</Compiler>
+				<Linker>
+					<Add library="opencv_imgproc$(CV_VERSION).dll" />
+					<Add library="opencv_core$(CV_VERSION).dll" />
+					<Add library="opencv_highgui$(CV_VERSION).dll" />
+					<Add directory="$(#cv.lib)" />
+					<Add directory="$(#cv.bin)" />
+				</Linker>
 			</Target>
-			<Target title="Release">
+			<Target title="ReleaseWindows">
 				<Option output="bin/Release/ldi" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c++11" />
 					<Add option="-s" />
+					<Add directory="$(#cv.include)" />
 				</Compiler>
+				<Linker>
+					<Add library="opencv_imgproc$(CV_VERSION).dll" />
+					<Add library="opencv_core$(CV_VERSION).dll" />
+					<Add library="opencv_highgui$(CV_VERSION).dll" />
+					<Add directory="$(#cv.lib)" />
+					<Add directory="$(#cv.bin)" />
+				</Linker>
 			</Target>
 			<Environment>
 				<Variable name="CV_VERSION" value="412" />
 			</Environment>
 		</Build>
-		<Compiler>
-			<Add directory="$(#cv.include)" />
-		</Compiler>
-		<Linker>
-			<Add library="opencv_imgproc$(CV_VERSION).dll" />
-			<Add library="opencv_core$(CV_VERSION).dll" />
-			<Add library="opencv_highgui$(CV_VERSION).dll" />
-			<Add directory="$(#cv.lib)" />
-			<Add directory="$(#cv.bin)" />
-		</Linker>
 		<Unit filename="arnold_schwarzenegger.jpg" />
 		<Unit filename="main.cpp" />
 		<Unit filename="version.h" />
